@@ -1,6 +1,11 @@
 module ShortUrl
   extend ActiveSupport::Concern
 
+  included do
+    after_save :set_short_url
+    validate :custom_uniqueness
+  end
+
   # Used set of symbols
   SYMBOLS_SET = [*'a'..'z', *'A'..'Z',*'0'..'9',]
   # Add chars you want to remove from link
@@ -16,28 +21,34 @@ module ShortUrl
   # Length of final string
   SET_SIZE = BASE_SET.length
 
-  INCREMENT_VALUE = SET_SIZE * SET_SIZE
+  # Set this value for initial url length (default = 3)
+  INITIAL_URL_LENGTH = 3
 
-  def set_short_url(id)
-    n = id + INCREMENT_VALUE
+  INCREMENT_VALUE = SET_SIZE ** (INITIAL_URL_LENGTH - 1)
+
+  def set_short_url
+    n = self.id + INCREMENT_VALUE
     shortened_url = ''
     while n > 0 do
       shortened_url = BASE_SET[n % SET_SIZE, 1] + shortened_url
       n = (n / SET_SIZE).floor
     end
-    shortened_url
+    self.update_column(:short, shortened_url)
   end
 
-  def get_id(url)
+  def get_id
     id = 0
-    i = url.length
+    i = short.length
     while i > 0 do
-      id += BASE_SET.index(url[-1 * (i - url.length), 1]) * (SET_SIZE ** (i - 1))
+      id += BASE_SET.index(short[-1 * (i - short.length), 1]) * (SET_SIZE ** (i - 1))
       i-=1
     end
     id -= INCREMENT_VALUE
   end
+
+  def custom_uniqueness
+    if self.class.where('short = :custom', {custom: custom}).exists?
+      errors.add(:custom, :taken)
+    end
+  end
 end
-
-
-
