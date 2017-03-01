@@ -1,5 +1,6 @@
 module ShortUrl
   extend ActiveSupport::Concern
+  extend Shuffle
 
   included do
     after_save :set_short_url
@@ -12,7 +13,11 @@ module ShortUrl
   AMBIGUOUS_CHARACTERS = %w(0 1 O I l)
 
   # Final string of chars
-  BASE_SET = (SYMBOLS_SET - AMBIGUOUS_CHARACTERS).join('')
+  # BASE_SET = (SYMBOLS_SET - AMBIGUOUS_CHARACTERS).join('')
+  # I'm using own shuffle method, which always returns the same string
+  BASE_SET = pseudo_random((SYMBOLS_SET - AMBIGUOUS_CHARACTERS).join(''))
+
+  puts BASE_SET
 
   # You can also use SHUFFLE method before join for more security. In this way, save generated string, because it will
   # be changed after server restart
@@ -21,8 +26,8 @@ module ShortUrl
   # Length of final string
   SET_SIZE = BASE_SET.length
 
-  # Set this value for initial url length (default = 3)
-  INITIAL_URL_LENGTH = 3
+  # Set this value for initial url length (default = 5)
+  INITIAL_URL_LENGTH = 5
 
   INCREMENT_VALUE = SET_SIZE ** (INITIAL_URL_LENGTH - 1)
 
@@ -52,3 +57,5 @@ module ShortUrl
     end
   end
 end
+
+
