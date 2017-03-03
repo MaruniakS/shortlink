@@ -6,7 +6,8 @@
             <div class="input-group">
               <%= f.text_field :long, placeholder: 'Paste your link', id: 'link-input', class: 'form-control short-input' %>
               <span class="input-group-btn">
-                <%= f.submit 'Make short!', class: 'btn short-btn' %>
+                <%= f.submit 'Make short!', class: 'btn short-btn', id: 'submit-url' %>
+                <%= button_tag 'Copy!', type: 'button', class: 'btn short-btn', id: 'copy-url' %>
               </span>
             </div>
         <% end %>

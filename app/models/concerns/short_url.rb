@@ -41,19 +41,21 @@ module ShortUrl
     self.update_column(:short, shortened_url)
   end
 
-  def get_id
-    id = 0
-    i = short.length
-    while i > 0 do
-      id += BASE_SET.index(short[-1 * (i - short.length), 1]) * (SET_SIZE ** (i - 1))
-      i-=1
-    end
-    id -= INCREMENT_VALUE
-  end
-
   def custom_uniqueness
     if self.class.where('short = :custom', {custom: custom}).exists?
       errors.add(:custom, :taken)
+    end
+  end
+
+  module ClassMethods
+    def get_id(short)
+      id = 0
+      i = short.length
+      while i > 0 do
+        id += BASE_SET.index(short[-1 * (i - short.length), 1]) * (SET_SIZE ** (i - 1))
+        i-=1
+      end
+      id -= INCREMENT_VALUE
     end
   end
 end

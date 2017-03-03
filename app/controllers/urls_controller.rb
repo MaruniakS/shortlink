@@ -1,9 +1,12 @@
 class UrlsController < ApplicationController
+  def show
+    @url = Url.find_by(id: Url.get_id(params[:short]))
+    redirect_to @url.long
+  end
+
   def create
     @url = Url.find_or_create_by(url_params)
-    respond_to do |format|
-      format.js
-    end
+    render template: 'urls/errors.js.erb' unless @url.errors.empty?
   end
 
   private

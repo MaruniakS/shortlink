@@ -25,9 +25,14 @@
     }
   }
 
+  #copy-url {
+    display: none;
+  }
+
   .short-btn {
     @include default-input;
     color: #fff;
     background-color: #ee6123;
+    width: 120px;
   }
 }
