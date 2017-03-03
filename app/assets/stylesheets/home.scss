@@ -1,3 +1,33 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/* ==== URL SHORTENER MAIN CONTAINER ==== */
+
+.main-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background: #999999 asset-url('main/head.jpg') no-repeat center;
+  background-size: cover;
+
+  @mixin default-input {
+    height: 60px;
+    font-size: 18px;
+    font-weight: 300;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  }
+  .short-input {
+    @include default-input;
+    color: #7f898e;
+
+    &:focus {
+      color: #ee6123;
+      background-color: #fef7f4;
+      border: none;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #ee6123;
+    }
+  }
+
+  .short-btn {
+    @include default-input;
+    color: #fff;
+    background-color: #ee6123;
+  }
+}

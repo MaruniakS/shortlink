@@ -1,6 +1,6 @@
 module Shuffle
   def pseudo_random(str)
-    n = 6
+    n = 7
     while n > 0 do
       str = shuffle(str.scan(/.{1,#{n}}/))
       n -= 1
@@ -10,9 +10,5 @@ module Shuffle
 
   def shuffle(arr)
     arr.partition.each_with_index{ |_, i| i.odd? }.join('')
-  end
-
-  def self.abc
-
   end
 end

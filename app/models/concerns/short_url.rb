@@ -26,8 +26,8 @@ module ShortUrl
   # Length of final string
   SET_SIZE = BASE_SET.length
 
-  # Set this value for initial url length (default = 5)
-  INITIAL_URL_LENGTH = 5
+  # Set this value for initial url length (default = 4)
+  INITIAL_URL_LENGTH = 4
 
   INCREMENT_VALUE = SET_SIZE ** (INITIAL_URL_LENGTH - 1)
 
