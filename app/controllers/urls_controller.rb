@@ -1,10 +1,8 @@
 class UrlsController < ApplicationController
   def create
     @url = Url.find_or_create_by(url_params)
-    if @url.errors.empty?
-      render json: @url.as_json
-    else
-      render json: @url.errors.full_messages.as_json
+    respond_to do |format|
+      format.js
     end
   end
 
