@@ -17,7 +17,6 @@ module ShortUrl
   # I'm using own shuffle method, which always returns the same string
   BASE_SET = pseudo_random((SYMBOLS_SET - AMBIGUOUS_CHARACTERS).join(''))
 
-  puts BASE_SET
 
   # You can also use SHUFFLE method before join for more security. In this way, save generated string, because it will
   # be changed after server restart

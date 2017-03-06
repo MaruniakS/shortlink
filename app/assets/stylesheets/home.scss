@@ -35,4 +35,18 @@
     background-color: #ee6123;
     width: 120px;
   }
+
+  .errors-container {
+    position: relative;
+    display: none;
+  }
+
+  #url-errors {
+    position: absolute;
+    width: 100%;
+    top: 20px;
+    .errors-list {
+      padding-left: 20px;
+    }
+  }
 }

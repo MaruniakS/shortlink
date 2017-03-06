@@ -1,3 +1,4 @@
 $('#link-input').val('<%= "#{request.base_url}/#{@url.short}" %>');
-$('#submit-url').toggle();
-$('#copy-url').toggle();
+$('#submit-url').hide();
+$('#copy-url').show();
+$('.errors-container').hide();

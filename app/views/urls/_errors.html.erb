@@ -1,0 +1,9 @@
+<div class="errors .alert-dismissable fade in">
+  <strong>Short url can't be generated!</strong>
+  <a href="" remote="true" class="close" data-dismiss="errors" aria-label="close">&times;</a>
+  <ul class="errors-list">
+    <% messages.each do |msg| %>
+      <li> <%= msg %> </li>
+    <% end %>
+  </ul>
+</div>
