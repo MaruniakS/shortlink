@@ -4,7 +4,7 @@ module ShortUrl
 
   included do
     after_save :set_short_url
-    validate :custom_uniqueness
+    validate :custom_uniqueness, :no_ambiguous_chars
   end
 
   # Used set of symbols
@@ -41,8 +41,12 @@ module ShortUrl
   end
 
   def custom_uniqueness
-    if self.class.where('short = :custom', {custom: custom}).exists?
-      errors.add(:custom, :taken)
+    errors.add(:custom, :taken) if self.class.where('short = :custom', {custom: custom}).exists?
+  end
+
+  def no_ambiguous_chars
+    if custom
+      errors.add(:custom, 'can contain only numbers and digits') unless custom =~ /^[0-9a-zA-Z]*$/
     end
   end
 

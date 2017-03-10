@@ -1,0 +1,6 @@
+<% flash.each do |_, message| %>
+    <div class="flash-message alert  alert-danger fade in">
+      <button class="close" data-dismiss="alert">×</button>
+      <%= message %>
+    </div>
+<% end %>

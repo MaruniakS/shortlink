@@ -1,0 +1,15 @@
+<%= form_for @url, remote: true, html: {id: 'custom-url-form'} do |f|%>
+    <div class="form-group">
+      <%= f.text_field :long, placeholder: 'Paste long link', id: 'link-input',
+                       class: 'form-control short-input' %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :custom, placeholder: 'Write your own short link', id: 'custom-link',
+                       class: 'form-control short-input' %>
+    </div>
+    <div class="form-group">
+
+      <%= f.submit 'Create short!', class: 'btn short-btn', id: 'submit-url' %>
+      <%= button_tag 'Copy!', type: 'button', class: 'btn short-btn', id: 'copy-url' %>
+    </div>
+<% end %>

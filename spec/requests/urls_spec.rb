@@ -11,11 +11,4 @@ RSpec.describe 'urls API', type: :request do
     post '/urls', url: { long: 'http://url.long' } , format: :js
     expect(response.content_type).to eq Mime[:js]
   end
-
-=begin
-  it "does not render a different template" do
-    get "/widgets/new"
-    expect(response).to_not render_template(:show)
-  end
-=end
 end

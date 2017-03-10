@@ -1,4 +1,6 @@
-$('#link-input').val('<%= "#{request.base_url}/#{@url.short}" %>');
+var url = '<%= "#{request.base_url}/" %>';
+url += $('#custom-link').length ? '<%= "#{@url.custom}"%>' : '<%= "#{@url.short}"%>';
+$('#link-input').val(url);
 $('#submit-url').hide();
 $('#copy-url').show();
 $('.errors-container').hide();

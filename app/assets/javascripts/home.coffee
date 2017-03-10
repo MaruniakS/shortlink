@@ -44,7 +44,7 @@ copyToClipboard = (elem) ->
 $(document).on 'click', '#copy-url', (e) ->
   copyToClipboard document.getElementById('link-input')
   return
-$(document).on 'paste', '#link-input', (e) ->
+$(document).on 'paste', '#url-form #link-input', (e) ->
   setTimeout (->
     $('#submit-url').click()
     return

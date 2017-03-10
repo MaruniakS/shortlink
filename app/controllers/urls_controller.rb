@@ -1,12 +1,17 @@
 class UrlsController < ApplicationController
   def show
-    @url = Url.find_by(id: Url.get_id(params[:short]))
-    redirect_to @url.long
+    @url = Url.where('short = :short or custom = :short', short: params[:short]).first
+    redirect_to @url.long and return if @url
+    redirect_to root_path, flash: { error: 'Url was not found, try another!' }
   end
 
   def create
     @url = Url.find_or_create_by(url_params)
     render template: 'urls/errors.js.erb' unless @url.errors.empty?
+  end
+
+  def custom
+    @url = Url.new
   end
 
   private
