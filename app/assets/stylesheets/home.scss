@@ -64,4 +64,13 @@
     transform: translateX(-50%);
     width: 250px;
   }
+
+  .nav-links {
+    position: absolute;
+    top: 20px;
+    a {
+      display: block;
+      color: #FFFFFF;
+    }
+  }
 }
