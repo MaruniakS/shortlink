@@ -1,2 +1,2 @@
-$('.errors-container').toggle();
+$('.errors-container').show();
 $('#url-errors').html('<%=j render partial: 'urls/errors', locals: { messages: error_messages(@url) } %> ');

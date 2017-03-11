@@ -1,9 +1,10 @@
 class Url < ApplicationRecord
   include ShortUrl
 
-  validates :long, presence: true, uniqueness: true
-  validates :custom, :short, uniqueness: true, allow_blank: true
-  validates :long, format: { with: URI::regexp(%w(http https)), message: 'has to start with http or https'}
+  validates_uniqueness_of :short
+  validates :custom, uniqueness: true, length: { minimum: INITIAL_URL_LENGTH }, allow_nil: true
+  validates :long, presence: true, uniqueness: true,
+            format: { with: URI::regexp(%w(http https)), message: 'has to start with http or https'}
 
   HUMANIZED_ATTRIBUTES = {
       long: 'Long url',

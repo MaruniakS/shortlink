@@ -41,6 +41,11 @@ copyToClipboard = (elem) ->
     target.textContent = ''
   succeed
 
+toggleCopy = () ->
+  if $('#copy-url:hidden').length == 0
+    $('#copy-url').hide()
+    $('#submit-url').show()
+
 $(document).on 'click', '#copy-url', (e) ->
   copyToClipboard document.getElementById('link-input')
   return
@@ -51,7 +56,8 @@ $(document).on 'paste', '#url-form #link-input', (e) ->
   ), 100
   return
 $(document).on 'keyup', '#link-input', (e) ->
-  if $('#copy-url:hidden').length == 0
-    $('#copy-url').hide()
-    $('#submit-url').show()
+  toggleCopy()
+  return
+$(document).on 'keyup', '#custom-link', (e) ->
+  toggleCopy()
   return
